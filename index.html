@@ -1,0 +1,1748 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Fashsnacks</title>
+  <meta name="theme-color" content="#5b2d8a" />
+  <meta name="description" content="Golden Organic Goodies. Proudly Ugandan." />
+  <link id="manifestLink" rel="manifest" href="" />
+  <link id="faviconLink" rel="icon" href="" />
+
+  <style>
+    :root{
+      --primary:#5b2d8a;
+      --primary2:#43206a;
+      --gold:#d4af37;
+      --bg:#ffffff;
+      --card:#f6f6f8;
+      --text:#101018;
+      --muted:#6a6a78;
+      --border:#e8e8ef;
+      --shadow:0 10px 26px rgba(0,0,0,.10);
+      --shadow2:0 18px 55px rgba(0,0,0,.18);
+      --r:18px;
+      --danger:#e74c3c;
+      --ok:#2ecc71;
+    }
+    body.dark{
+      --bg:#0f0f13;
+      --card:#171720;
+      --text:#f2f2f6;
+      --muted:#b7b7c4;
+      --border:#2a2a35;
+      --shadow:0 12px 34px rgba(0,0,0,.50);
+      --shadow2:0 22px 70px rgba(0,0,0,.70);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:60;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 14px;border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+    }
+    body.dark .nav{background:rgba(15,15,19,.72)}
+    .brand{display:flex;align-items:center;gap:10px;min-width:220px}
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      color:#fff;font-weight:1000;
+      background:linear-gradient(135deg,var(--primary),#8a49d4);
+      box-shadow:0 10px 24px rgba(91,45,138,.25);
+      transform:translateZ(0);
+      user-select:none;
+    }
+    .brand h1{margin:0;font-size:16px;letter-spacing:.2px}
+    .brand small{display:block;color:var(--muted);font-weight:800;margin-top:2px}
+    .navRight{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      border:0;cursor:pointer;font-weight:900;
+      padding:10px 12px;border-radius:14px;transition:.2s;
+      display:inline-flex;align-items:center;gap:8px;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btnPrimary{background:var(--primary);color:#fff}
+    .btnPrimary:hover{background:var(--primary2)}
+    .btnGhost{background:transparent;border:1px solid var(--border);color:var(--text)}
+    .btnSoft{background:rgba(91,45,138,.12);border:1px solid rgba(91,45,138,.22);color:var(--text)}
+    .wrap{max-width:1200px;margin:0 auto;padding:82px 14px 126px}
+    .hero{
+      border:1px solid var(--border);
+      background:linear-gradient(135deg,var(--primary),#8a49d4,var(--gold));
+      border-radius:26px;
+      color:#fff;
+      padding:26px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+      animation:popIn .55s ease both;
+    }
+    @keyframes popIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .heroGlow{
+      position:absolute;inset:-90px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 42%),
+        radial-gradient(circle at 70% 30%, rgba(212,175,55,.28), transparent 45%),
+        radial-gradient(circle at 40% 80%, rgba(0,0,0,.22), transparent 48%);
+      filter:blur(12px);
+      pointer-events:none;
+    }
+    .hero h2{margin:0 0 6px;font-size:28px}
+    .hero p{margin:0;opacity:.95;max-width:900px}
+    .heroRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.22);
+      font-weight:1000;
+    }
+
+    .sectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:22px 0 10px}
+    .sectionHead h3{margin:0;font-size:18px}
+    .muted{color:var(--muted);font-weight:700}
+
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .chip{
+      border:1px solid var(--border);
+      background:transparent;
+      color:var(--text);
+      padding:8px 10px;border-radius:999px;
+      font-weight:1000;font-size:12px;cursor:pointer;transition:.2s;
+    }
+    .chip.active{background:rgba(212,175,55,.16);border-color:rgba(212,175,55,.35)}
+    .chip:hover{transform:translateY(-1px)}
+
+    .grid{
+      display:grid;gap:14px;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    }
+    .card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:18px;overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:.25s;
+      animation:fadeUp .35s ease both;
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .card:hover{transform:translateY(-3px);box-shadow:var(--shadow2)}
+    .media{aspect-ratio:16/9;background:#ddd;display:grid;place-items:center;overflow:hidden}
+    .media img{width:100%;height:100%;object-fit:cover;transition:.3s}
+    .card:hover .media img{transform:scale(1.05)}
+    .ph{font-weight:1000;color:#444}
+    body.dark .ph{color:#bbb}
+    .cardBody{padding:12px}
+    .name{font-weight:1000;font-size:15px;margin:0}
+    .desc{margin:6px 0 10px;font-size:13px;color:var(--muted);min-height:34px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .price{font-weight:1000;color:var(--gold)}
+    .qty{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--border);border-radius:999px;padding:6px 8px;
+      background:rgba(255,255,255,.35);
+    }
+    body.dark .qty{background:rgba(0,0,0,.25)}
+    .qty button{
+      width:28px;height:28px;border-radius:10px;border:0;
+      cursor:pointer;font-weight:1000;
+      background:rgba(0,0,0,.08);color:var(--text);transition:.2s;
+    }
+    body.dark .qty button{background:rgba(255,255,255,.10);color:#fff}
+    .qty button:hover{transform:translateY(-1px)}
+    .qty button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+    .tag{font-size:12px;font-weight:1000;padding:6px 10px;border-radius:999px;border:1px solid var(--border)}
+    .tag.low{background:rgba(46,204,113,.12)}
+    .tag.out{background:rgba(231,76,60,.12)}
+    .tag.featured{background:rgba(212,175,55,.14)}
+
+    .dock{
+      position:fixed;left:50%;transform:translateX(-50%);
+      bottom:14px;z-index:65;
+      width:min(980px,calc(100% - 20px));
+      background:rgba(15,15,18,.94);color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;padding:12px;
+      box-shadow:0 20px 70px rgba(0,0,0,.35);
+      display:none;
+      animation:rise .22s ease both;
+    }
+    @keyframes rise{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+    .dock .muted{color:rgba(255,255,255,.75)}
+    .dockActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+
+    .modal{
+      position:fixed;inset:0;z-index:80;
+      background:rgba(0,0,0,.60);
+      display:none;align-items:center;justify-content:center;padding:14px;
+    }
+    .modal.active{display:flex}
+    .panel{
+      width:min(1100px,100%);
+      max-height:92vh;overflow:auto;
+      background:var(--bg);border:1px solid var(--border);
+      border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.45);
+      animation:panelIn .22s ease both;
+    }
+    @keyframes panelIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .panelHead{
+      position:sticky;top:0;z-index:3;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+      padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .panelHead strong{font-size:14px}
+    .panelBody{padding:12px}
+    .hr{height:1px;background:var(--border);margin:12px 0}
+    input,select,textarea{
+      width:100%;padding:10px 10px;border-radius:12px;
+      border:1px solid var(--border);background:transparent;color:var(--text);
+      font-weight:850;outline:none;
+    }
+    textarea{min-height:90px;resize:vertical}
+    label{display:block;font-size:12px;font-weight:1000;margin:0 0 6px;color:var(--muted)}
+    .form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .full{grid-column:1/-1}
+    .toast{
+      position:fixed;left:50%;transform:translateX(-50%);
+      bottom:92px;z-index:90;
+      background:#111;color:#fff;
+      padding:10px 12px;border-radius:12px;
+      font-weight:1000;display:none;
+    }
+    .twoCol{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+    @media (max-width:900px){.twoCol{grid-template-columns:1fr}}
+    .kpiRow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    @media (max-width:900px){.kpiRow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .kpi{
+      background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px;
+      box-shadow:var(--shadow);
+    }
+    .kpi .t{font-weight:1000;font-size:12px;color:var(--muted)}
+    .kpi .v{font-weight:1000;font-size:18px;margin-top:6px}
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">FS</div>
+      <div>
+        <h1 id="brandName">Fashsnacks</h1>
+        <small id="tagline">Golden Organic Goodies</small>
+      </div>
+    </div>
+
+    <div class="navRight">
+      <button class="btn btnSoft" id="installBtn" style="display:none">Install</button>
+      <button class="btn btnGhost" id="themeBtn">Theme</button>
+      <button class="btn btnGhost" id="aboutBtn">About</button>
+      <button class="btn btnGhost" id="adminBtn">Admin</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="heroGlow"></div>
+      <h2 id="heroTitle">Golden Organic Goodies</h2>
+      <p id="heroSub">Proudly Ugandan snacks made with care</p>
+      <div class="heroRow">
+        <div class="pill" id="mottoPill">Its Nutting Time</div>
+        <div class="pill">UGX only</div>
+        <div class="pill">Order on WhatsApp or Call</div>
+      </div>
+      <div class="heroRow">
+        <button class="btn btnPrimary" id="heroOrder">Order on WhatsApp</button>
+        <a class="btn btnGhost" id="heroCall" href="tel:+265776136111">Call</a>
+      </div>
+    </section>
+
+    <div class="sectionHead">
+      <div>
+        <h3>Products</h3>
+        <div class="muted" id="subline">Stock is live and enforced</div>
+      </div>
+      <div class="toolbar" id="filters"></div>
+    </div>
+
+    <div class="toolbar" style="margin-bottom:10px">
+      <button class="chip active" id="sortFeatured">Featured</button>
+      <button class="chip" id="sortLow">Lowest price</button>
+      <button class="chip" id="sortHigh">Highest price</button>
+      <button class="chip" id="sortStock">Low stock</button>
+    </div>
+
+    <section class="grid" id="grid"></section>
+
+    <div class="sectionHead" style="margin-top:26px">
+      <div>
+        <h3>Delivery</h3>
+        <div class="muted">Choose a zone at checkout</div>
+      </div>
+    </div>
+
+    <div class="twoCol">
+      <div class="card" style="padding:12px">
+        <div style="font-weight:1000">Delivery zones</div>
+        <div class="muted" style="margin-top:6px">Admin manages zones and fees</div>
+        <div class="hr"></div>
+        <div id="zoneList" class="muted">No zones yet</div>
+      </div>
+
+      <div class="card" style="padding:12px">
+        <div style="font-weight:1000">Contacts</div>
+        <div class="muted" style="margin-top:6px">WhatsApp and Call</div>
+        <div class="hr"></div>
+        <div class="muted">WhatsApp <b id="waText">+265776136111</b></div>
+        <div class="muted" style="margin-top:6px">Call <b id="callText">+265776136111</b></div>
+        <div class="muted" style="margin-top:10px" id="emailText"></div>
+        <div class="muted" style="margin-top:10px" id="mapText"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dock" id="dock">
+    <div class="row" style="align-items:flex-start">
+      <div>
+        <div style="font-weight:1000">Cart</div>
+        <div class="muted" id="cartMini">0 items</div>
+      </div>
+      <div class="dockActions">
+        <div style="font-weight:1000" id="cartTotal">UGX 0</div>
+        <button class="btn btnGhost" id="viewCart">View</button>
+        <button class="btn btnPrimary" id="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <!-- ABOUT MODAL -->
+  <div class="modal" id="aboutModal">
+    <div class="panel">
+      <div class="panelHead">
+        <strong>About Fashsnacks</strong>
+        <button class="btn btnGhost" id="closeAbout">Close</button>
+      </div>
+      <div class="panelBody">
+        <div class="card" style="padding:12px">
+          <div style="font-weight:1000">One line</div>
+          <div class="muted" id="aboutOneLine" style="margin-top:6px"></div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="twoCol">
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Brand story</div>
+            <div class="muted" id="aboutStory" style="margin-top:10px;white-space:pre-wrap"></div>
+          </div>
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Founder</div>
+            <div class="muted" style="margin-top:10px" id="aboutFounder"></div>
+            <div class="hr"></div>
+            <div style="font-weight:1000">Vision</div>
+            <div class="muted" style="margin-top:10px" id="aboutVision"></div>
+            <div class="hr"></div>
+            <div style="font-weight:1000">Mission</div>
+            <div class="muted" style="margin-top:10px" id="aboutMission"></div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="card" style="padding:12px">
+          <div style="font-weight:1000">Core values</div>
+          <div class="muted" id="aboutValues" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div class="modal" id="cartModal">
+    <div class="panel">
+      <div class="panelHead">
+        <strong>Checkout</strong>
+        <button class="btn btnGhost" id="closeCart">Close</button>
+      </div>
+      <div class="panelBody">
+        <div id="cartList" class="muted">No items</div>
+
+        <div class="hr"></div>
+
+        <div class="form">
+          <div>
+            <label>Name</label>
+            <input id="cName" placeholder="Your name" />
+          </div>
+          <div>
+            <label>Phone</label>
+            <input id="cPhone" placeholder="07" />
+          </div>
+          <div class="full">
+            <label>Delivery zone</label>
+            <select id="cZone"></select>
+          </div>
+          <div class="full">
+            <label>Delivery address</label>
+            <input id="cAddress" placeholder="Area and directions" />
+          </div>
+          <div class="full">
+            <label>Notes</label>
+            <textarea id="cNotes" placeholder="Any request"></textarea>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="row" style="justify-content:flex-end;flex-wrap:wrap;gap:10px">
+          <button class="btn btnGhost" id="orderCall">Call</button>
+          <button class="btn btnPrimary" id="orderWhatsApp">Send on WhatsApp</button>
+          <button class="btn btnSoft" id="placeOrder">Save order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN MODAL -->
+  <div class="modal" id="adminModal">
+    <div class="panel">
+      <div class="panelHead">
+        <strong>Admin Panel</strong>
+        <button class="btn btnGhost" id="closeAdmin">Close</button>
+      </div>
+      <div class="panelBody">
+
+        <div class="kpiRow" id="kpis"></div>
+
+        <div class="hr"></div>
+
+        <div class="twoCol">
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Mode and Supabase</div>
+            <div class="muted" style="margin-top:6px">Local Mode works instantly Supabase Mode syncs everything</div>
+            <div class="hr"></div>
+
+            <label>Supabase URL</label>
+            <input id="sbUrl" placeholder="https://xxxx.supabase.co" />
+
+            <label>Supabase Anon Key</label>
+            <input id="sbKey" placeholder="Paste anon key" />
+
+            <div class="row" style="margin-top:10px;gap:10px;flex-wrap:wrap">
+              <button class="btn btnSoft" id="saveKeys">Save keys</button>
+              <button class="btn btnGhost" id="syncNow">Sync now</button>
+              <button class="btn btnGhost" id="testSupabase">Test</button>
+              <span class="muted" id="modeText">Local Mode</span>
+            </div>
+
+            <div class="hr"></div>
+
+            <div style="font-weight:1000">Storage bucket</div>
+            <div class="muted" style="margin-top:6px">Create bucket named product-images</div>
+            <div class="muted" style="margin-top:6px">If upload fails, the app falls back to local image</div>
+          </div>
+
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Admin login</div>
+            <div class="muted" style="margin-top:6px">Local password now Supabase auth later</div>
+            <div class="hr"></div>
+            <label>Password</label>
+            <input id="adminPass" type="password" placeholder="Enter admin password" />
+            <div class="row" style="gap:10px;margin-top:10px;flex-wrap:wrap">
+              <button class="btn btnPrimary" id="adminLogin">Login</button>
+              <button class="btn btnGhost" id="adminLogout">Logout</button>
+              <span class="muted" id="adminState">Locked</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="twoCol">
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Brand and contact settings</div>
+            <div class="muted" style="margin-top:6px">These show in the app instantly</div>
+            <div class="hr"></div>
+
+            <div class="form">
+              <div>
+                <label>Brand name</label>
+                <input id="sBrand" placeholder="Fashsnacks" />
+              </div>
+              <div>
+                <label>Tagline</label>
+                <input id="sTagline" placeholder="Golden Organic Goodies" />
+              </div>
+              <div>
+                <label>WhatsApp number</label>
+                <input id="sWhatsApp" placeholder="+265..." />
+              </div>
+              <div>
+                <label>Call number</label>
+                <input id="sCall" placeholder="+265..." />
+              </div>
+              <div class="full">
+                <label>Email</label>
+                <input id="sEmail" placeholder="orders@fashsnacks.ug" />
+              </div>
+              <div class="full">
+                <label>Map link</label>
+                <input id="sMap" placeholder="https://maps.google.com/..." />
+              </div>
+              <div class="full">
+                <label>Motto</label>
+                <input id="sMotto" placeholder="Its Nutting Time" />
+              </div>
+              <div class="full">
+                <button class="btn btnSoft" id="saveSettings">Save settings</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">About content</div>
+            <div class="muted" style="margin-top:6px">All inside this one build</div>
+            <div class="hr"></div>
+
+            <div class="form">
+              <div class="full">
+                <label>About one line</label>
+                <input id="aOneLine" placeholder="Proudly Ugandan snacks packed with love, premium quality" />
+              </div>
+              <div class="full">
+                <label>Brand story</label>
+                <textarea id="aStory"></textarea>
+              </div>
+              <div class="full">
+                <label>Founder</label>
+                <input id="aFounder" placeholder="Male Haila Ssimbwa" />
+              </div>
+              <div class="full">
+                <label>Vision</label>
+                <textarea id="aVision"></textarea>
+              </div>
+              <div class="full">
+                <label>Mission</label>
+                <textarea id="aMission"></textarea>
+              </div>
+              <div class="full">
+                <label>Core values</label>
+                <input id="aValues" placeholder="Authenticity, Quality, Creativity, Community, Sustainability" />
+              </div>
+              <div class="full">
+                <button class="btn btnSoft" id="saveAbout">Save about</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="twoCol">
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Products</div>
+            <div class="muted" style="margin-top:6px">Upload from phone or paste a URL</div>
+            <div class="hr"></div>
+
+            <div class="form">
+              <div>
+                <label>Name</label>
+                <input id="pName" placeholder="Golden Roasted Gnuts" />
+              </div>
+              <div>
+                <label>Category</label>
+                <input id="pCat" placeholder="Nuts" />
+              </div>
+              <div class="full">
+                <label>Description</label>
+                <input id="pDesc" placeholder="Short description" />
+              </div>
+              <div>
+                <label>Price UGX</label>
+                <input id="pPrice" type="number" />
+              </div>
+              <div>
+                <label>Size label</label>
+                <input id="pSize" placeholder="100g" />
+              </div>
+              <div>
+                <label>Stock qty</label>
+                <input id="pStock" type="number" />
+              </div>
+              <div>
+                <label>Featured</label>
+                <select id="pFeatured">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+              <div class="full">
+                <label>Image upload</label>
+                <input id="pImgFile" type="file" accept="image/*" />
+              </div>
+              <div class="full">
+                <label>Image URL</label>
+                <input id="pImgUrl" placeholder="https://image.jpg" />
+              </div>
+              <div class="full">
+                <button class="btn btnPrimary" id="addProduct">Add product</button>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+            <div id="adminProducts" class="muted">No products</div>
+          </div>
+
+          <div class="card" style="padding:12px">
+            <div style="font-weight:1000">Operations</div>
+            <div class="muted" style="margin-top:6px">Delivery zones and orders dashboard</div>
+            <div class="hr"></div>
+
+            <div style="font-weight:1000">Delivery zones</div>
+            <div class="form" style="margin-top:10px">
+              <div>
+                <label>Zone name</label>
+                <input id="zName" placeholder="Busega" />
+              </div>
+              <div>
+                <label>Fee UGX</label>
+                <input id="zFee" type="number" />
+              </div>
+              <div class="full">
+                <button class="btn btnSoft" id="addZone">Add zone</button>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div style="font-weight:1000">Orders dashboard</div>
+            <div class="muted" style="margin-top:6px">New, confirmed, preparing, out for delivery, delivered, cancelled</div>
+            <div style="margin-top:10px" id="ordersBoard" class="muted">No orders</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+  (function(){
+    const $ = (s,r=document)=>r.querySelector(s);
+    const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+    const toast = (m)=>{
+      const t=$("#toast");
+      t.textContent=m;
+      t.style.display="block";
+      clearTimeout(toast._t);
+      toast._t=setTimeout(()=>t.style.display="none",1200);
+    };
+
+    const uid = ()=>"id_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
+    const fmtUGX = (n)=>"UGX " + Math.round(n||0).toLocaleString();
+    const esc = (s)=>String(s??"").replace(/[&<>"']/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+    const load = (k,fb)=>{ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):structuredClone(fb);}catch{ return structuredClone(fb);} };
+    const save = (k,v)=>localStorage.setItem(k,JSON.stringify(v));
+
+    const K = {
+      theme:"fash_theme",
+      sb:"fash_supabase_keys",
+      admin:"fash_admin_ok",
+      settings:"fash_settings",
+      about:"fash_about",
+      products:"fash_products",
+      zones:"fash_zones",
+      cart:"fash_cart",
+      orders:"fash_orders"
+    };
+
+    const DEFAULT_SETTINGS = {
+      brand_name:"Fashsnacks",
+      tagline:"Golden Organic Goodies",
+      whatsapp_number:"+265776136111",
+      call_number:"+265776136111",
+      email:"orders@fashsnacks.ug",
+      map_url:"",
+      motto:"Its Nutting Time"
+    };
+
+    const DEFAULT_ABOUT = {
+      one_line:"Proudly Ugandan snacks packed with love, premium quality.",
+      story:
+`Born in the heart of Kampala Uganda Fashsnacks was founded to revive the joy of traditional East African snacks while elevating them for the modern world.
+From roasted groundnuts to banana crisps to caramel bagiya and cocoa cookies we take the flavors we grew up with and wrap them in pride and premium care.
+We started in a humble home kitchen sorting groundnuts by lamplight and grew into a trusted brand known for authentic taste clean ingredients and joyful design.`,
+      founder:"Ssentongo Male Haila Ssimbwa",
+      vision:"To become Africa’s most loved snack brand known globally for organic quality vibrant creativity and unforgettable taste rooted in culture.",
+      mission:"To provide delicious proudly Ugandan snacks made from the finest natural ingredients roasted packed and delivered with joy.",
+      values:"Authenticity, Quality, Creativity, Community, Sustainability"
+    };
+
+    const DEFAULT_PRODUCTS = [
+      { id:uid(), name:"Golden Roasted Gnuts", category:"Nuts", description:"Crunchy clean classic", price_ugx:3500, size_label:"100g", stock_qty:40, is_active:true, is_featured:true, images:[] },
+      { id:uid(), name:"Banana Crisps", category:"Chips", description:"Crispy golden slices", price_ugx:4000, size_label:"100g", stock_qty:55, is_active:true, is_featured:true, images:[] },
+      { id:uid(), name:"Cocoa Chip Cookies", category:"Cookies", description:"Crunchy cocoa joy", price_ugx:9000, size_label:"200g", stock_qty:18, is_active:true, is_featured:false, images:[] }
+    ];
+
+    const DEFAULT_ZONES = [
+      { id:uid(), name:"Busega", fee_ugx:2000, is_active:true },
+      { id:uid(), name:"Kawempe", fee_ugx:3000, is_active:true },
+      { id:uid(), name:"Ntinda", fee_ugx:4000, is_active:true }
+    ];
+
+    let settings = load(K.settings, DEFAULT_SETTINGS);
+    let about = load(K.about, DEFAULT_ABOUT);
+    let products = load(K.products, DEFAULT_PRODUCTS);
+    let zones = load(K.zones, DEFAULT_ZONES);
+    let cart = load(K.cart, {});
+    let orders = load(K.orders, []);
+
+    let filter="all";
+    let sortMode="featured";
+
+    // Theme
+    function applyTheme(){
+      const th = localStorage.getItem(K.theme) || "light";
+      document.body.classList.toggle("dark", th==="dark");
+    }
+    $("#themeBtn").onclick = ()=>{
+      const isDark = document.body.classList.toggle("dark");
+      localStorage.setItem(K.theme, isDark ? "dark" : "light");
+    };
+    applyTheme();
+
+    // PWA assets
+    function setPWAAssets(){
+      const iconSvg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#5b2d8a"/>
+              <stop offset="1" stop-color="#8a49d4"/>
+            </linearGradient>
+          </defs>
+          <rect x="10" y="10" width="108" height="108" rx="26" fill="url(#g)"/>
+          <text x="64" y="78" font-family="Arial" font-size="44" text-anchor="middle" fill="#fff" font-weight="900">FS</text>
+        </svg>
+      `.trim();
+      const icon = "data:image/svg+xml;utf8,"+encodeURIComponent(iconSvg);
+      $("#faviconLink").href = icon;
+
+      const manifest = {
+        name: settings.brand_name || "Fashsnacks",
+        short_name: "Fashsnacks",
+        start_url: "./",
+        display: "standalone",
+        background_color: "#ffffff",
+        theme_color: "#5b2d8a",
+        icons: [{ src: icon, sizes:"any", type:"image/svg+xml", purpose:"any maskable" }]
+      };
+      const blob = new Blob([JSON.stringify(manifest)], {type:"application/manifest+json"});
+      $("#manifestLink").href = URL.createObjectURL(blob);
+    }
+    setPWAAssets();
+
+    async function registerSW(){
+      if(!("serviceWorker" in navigator)) return;
+      const sw = `
+        const CACHE="fashsnacks-pwa-v2";
+        self.addEventListener("install",(e)=>{
+          e.waitUntil((async()=>{
+            const c=await caches.open(CACHE);
+            c.put("./", await fetch("./", {cache:"reload"}));
+            self.skipWaiting();
+          })());
+        });
+        self.addEventListener("activate",(e)=>{
+          e.waitUntil((async()=>{
+            const keys=await caches.keys();
+            await Promise.all(keys.map(k=>k===CACHE?null:caches.delete(k)));
+            self.clients.claim();
+          })());
+        });
+        self.addEventListener("fetch",(e)=>{
+          e.respondWith((async()=>{
+            try{ return await fetch(e.request); }
+            catch{
+              const c=await caches.open(CACHE);
+              const cached=await c.match("./");
+              return cached || new Response("Offline",{status:200});
+            }
+          })());
+        });
+      `;
+      const url = URL.createObjectURL(new Blob([sw],{type:"text/javascript"}));
+      try{ await navigator.serviceWorker.register(url); }catch{}
+    }
+    registerSW();
+
+    // Install prompt
+    let deferredPrompt=null;
+    window.addEventListener("beforeinstallprompt",(e)=>{
+      e.preventDefault();
+      deferredPrompt=e;
+      $("#installBtn").style.display="inline-flex";
+    });
+    $("#installBtn").onclick = async ()=>{
+      if(!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt=null;
+      $("#installBtn").style.display="none";
+    };
+
+    // About modal
+    $("#aboutBtn").onclick = ()=>{ renderAbout(); $("#aboutModal").classList.add("active"); };
+    $("#closeAbout").onclick = ()=>$("#aboutModal").classList.remove("active");
+    $("#aboutModal").onclick = (e)=>{ if(e.target.id==="aboutModal") $("#aboutModal").classList.remove("active"); };
+
+    // Cart modal
+    $("#heroOrder").onclick = ()=>openCart();
+    $("#viewCart").onclick = ()=>openCart();
+    $("#checkout").onclick = ()=>openCart();
+    $("#closeCart").onclick = ()=>$("#cartModal").classList.remove("active");
+    $("#cartModal").onclick = (e)=>{ if(e.target.id==="cartModal") $("#cartModal").classList.remove("active"); };
+
+    // Admin modal
+    $("#adminBtn").onclick = ()=>{ $("#adminModal").classList.add("active"); refreshAdminUI(); };
+    $("#closeAdmin").onclick = ()=>$("#adminModal").classList.remove("active");
+    $("#adminModal").onclick = (e)=>{ if(e.target.id==="adminModal") $("#adminModal").classList.remove("active"); };
+
+    // Admin auth local
+    const ADMIN_PASSWORD = "fashadmin";
+    const isAdmin = ()=>localStorage.getItem(K.admin)==="1";
+    const setAdmin = (v)=>localStorage.setItem(K.admin, v?"1":"0");
+
+    $("#adminLogin").onclick = ()=>{
+      const pass = ($("#adminPass").value||"").trim();
+      if(pass !== ADMIN_PASSWORD) return toast("Wrong password");
+      setAdmin(true);
+      refreshAdminUI();
+      toast("Unlocked");
+    };
+    $("#adminLogout").onclick = ()=>{
+      setAdmin(false);
+      refreshAdminUI();
+      toast("Locked");
+    };
+
+    // Settings to UI
+    function applySettingsToUI(){
+      $("#brandName").textContent = settings.brand_name || "Fashsnacks";
+      $("#tagline").textContent = settings.tagline || "Golden Organic Goodies";
+      $("#heroTitle").textContent = settings.tagline || "Golden Organic Goodies";
+      $("#mottoPill").textContent = settings.motto || "Its Nutting Time";
+
+      const wa = settings.whatsapp_number || "+265776136111";
+      const call = settings.call_number || "+265776136111";
+      $("#waText").textContent = wa;
+      $("#callText").textContent = call;
+      $("#heroCall").href = "tel:"+call.replace(/\D/g,"");
+
+      $("#emailText").textContent = settings.email ? ("Email " + settings.email) : "";
+      $("#mapText").innerHTML = settings.map_url ? (`Map <a class="btn btnGhost" style="padding:6px 10px;border-radius:12px;display:inline-flex;margin-left:6px" href="${esc(settings.map_url)}" target="_blank" rel="noopener">Open</a>`) : "";
+
+      $("#heroOrder").onclick = ()=>{
+        const url = "https://wa.me/" + wa.replace(/\D/g,"") + "?text=" + encodeURIComponent(buildWhatsAppText());
+        window.open(url,"_blank");
+      };
+      $("#orderCall").onclick = ()=>{ window.location.href = "tel:"+call.replace(/\D/g,""); };
+
+      setPWAAssets();
+    }
+
+    function renderAbout(){
+      $("#aboutOneLine").textContent = about.one_line || "";
+      $("#aboutStory").textContent = about.story || "";
+      $("#aboutFounder").textContent = about.founder || "";
+      $("#aboutVision").textContent = about.vision || "";
+      $("#aboutMission").textContent = about.mission || "";
+      $("#aboutValues").textContent = about.values || "";
+    }
+
+    // Filters
+    function renderFilters(){
+      const cats = Array.from(new Set(products.filter(p=>p.is_active).map(p=>p.category||"Snacks"))).sort();
+      const host = $("#filters");
+      const chips = ["all", ...cats];
+      host.innerHTML = chips.map(c=>{
+        const label = c==="all" ? "All" : c;
+        return `<button class="chip ${filter===c?"active":""}" data-cat="${esc(c)}">${esc(label)}</button>`;
+      }).join("");
+      $$("#filters .chip").forEach(b=>{
+        b.onclick = ()=>{
+          filter = b.dataset.cat;
+          render();
+        };
+      });
+    }
+
+    // Sorting controls
+    function setSortUI(){
+      $("#sortFeatured").classList.toggle("active", sortMode==="featured");
+      $("#sortLow").classList.toggle("active", sortMode==="low");
+      $("#sortHigh").classList.toggle("active", sortMode==="high");
+      $("#sortStock").classList.toggle("active", sortMode==="stock");
+    }
+    $("#sortFeatured").onclick = ()=>{ sortMode="featured"; setSortUI(); render(); };
+    $("#sortLow").onclick = ()=>{ sortMode="low"; setSortUI(); render(); };
+    $("#sortHigh").onclick = ()=>{ sortMode="high"; setSortUI(); render(); };
+    $("#sortStock").onclick = ()=>{ sortMode="stock"; setSortUI(); render(); };
+
+    // Zones
+    function renderZones(){
+      const active = zones.filter(z=>z.is_active);
+      const zList = $("#zoneList");
+      if(!active.length){ zList.textContent = "No zones yet"; }
+      else{
+        zList.innerHTML = active.map(z=>`<div>${esc(z.name)} fee ${fmtUGX(z.fee_ugx)}</div>`).join("");
+      }
+      const sel = $("#cZone");
+      sel.innerHTML = active.length
+        ? active.map(z=>`<option value="${esc(z.id)}">${esc(z.name)} fee ${fmtUGX(z.fee_ugx)}</option>`).join("")
+        : `<option value="">No zones</option>`;
+    }
+
+    // Grid
+    function renderGrid(){
+      let list = products.filter(p=>p.is_active);
+
+      if(filter !== "all") list = list.filter(p=>(p.category||"Snacks")===filter);
+
+      if(sortMode==="featured") list.sort((a,b)=>(b.is_featured?1:0)-(a.is_featured?1:0));
+      if(sortMode==="low") list.sort((a,b)=>a.price_ugx-b.price_ugx);
+      if(sortMode==="high") list.sort((a,b)=>b.price_ugx-a.price_ugx);
+      if(sortMode==="stock") list.sort((a,b)=>a.stock_qty-b.stock_qty);
+
+      const host = $("#grid");
+      if(!list.length){
+        host.innerHTML = `<div class="card" style="padding:12px">No products yet</div>`;
+        return;
+      }
+
+      host.innerHTML = list.map(p=>{
+        const qty = cart[p.id]||0;
+        const img = (p.images && p.images.length) ? p.images[0] : "";
+        const lowStock = p.stock_qty <= 5 && p.stock_qty > 0;
+        const out = p.stock_qty === 0;
+        const tag = out ? `<span class="tag out">Out of stock</span>` :
+                    lowStock ? `<span class="tag low">Low stock</span>` :
+                    p.is_featured ? `<span class="tag featured">Featured</span>` : `<span class="tag">Available</span>`;
+
+        return `
+          <article class="card">
+            <div class="media">
+              ${img ? `<img src="${esc(img)}" alt="">` : `<div class="ph">Fashsnacks</div>`}
+            </div>
+            <div class="cardBody">
+              <div class="row" style="align-items:flex-start">
+                <div style="flex:1">
+                  <p class="name">${esc(p.name)}</p>
+                  <div class="desc">${esc(p.description||"")}</div>
+                </div>
+                <div>${tag}</div>
+              </div>
+              <div class="row" style="margin-top:8px">
+                <div>
+                  <div class="price">${fmtUGX(p.price_ugx)}</div>
+                  <div class="muted" style="font-size:12px">${esc(p.size_label||"")}</div>
+                  <div class="muted" style="font-size:12px">Stock ${p.stock_qty}</div>
+                </div>
+                <div class="qty" onclick="event.stopPropagation()">
+                  <button ${out?'disabled':''} data-dec="${esc(p.id)}">-</button>
+                  <div style="min-width:18px;text-align:center;font-weight:1000">${qty}</div>
+                  <button ${out?'disabled':''} data-inc="${esc(p.id)}">+</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      $$("[data-inc]").forEach(b=>b.onclick=()=>addToCart(b.dataset.inc, +1));
+      $$("[data-dec]").forEach(b=>b.onclick=()=>addToCart(b.dataset.dec, -1));
+    }
+
+    // Cart with stock enforcement
+    function addToCart(id, delta){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+
+      const current = cart[id]||0;
+      let next = Math.max(0, current + delta);
+      next = Math.min(next, p.stock_qty);
+
+      if(next===0) delete cart[id];
+      else cart[id]=next;
+
+      save(K.cart, cart);
+      renderDock();
+      toast("Updated");
+    }
+
+    function cartItems(){
+      return Object.entries(cart)
+        .map(([id,qty])=>({ p:products.find(x=>x.id===id), qty }))
+        .filter(x=>x.p && x.qty>0);
+    }
+
+    function cartSubtotal(){
+      return cartItems().reduce((s,x)=>s + (x.p.price_ugx * x.qty), 0);
+    }
+
+    function renderDock(){
+      const count = Object.values(cart).reduce((a,b)=>a+(b||0),0);
+      if(count<=0){ $("#dock").style.display="none"; return; }
+      $("#dock").style.display="block";
+      $("#cartMini").textContent = count + " items";
+      $("#cartTotal").textContent = fmtUGX(cartSubtotal());
+    }
+
+    function openCart(){
+      renderCartModal();
+      $("#cartModal").classList.add("active");
+    }
+
+    function renderCartModal(){
+      const items = cartItems();
+      if(!items.length){
+        $("#cartList").textContent = "No items";
+        return;
+      }
+
+      const zoneId = $("#cZone").value || (zones.find(z=>z.is_active)?.id || "");
+      const zone = zones.find(z=>z.id===zoneId) || zones.find(z=>z.is_active) || null;
+      const fee = zone ? zone.fee_ugx : 0;
+
+      $("#cartList").innerHTML = items.map(x=>{
+        return `
+          <div class="card" style="padding:12px;margin-bottom:10px">
+            <div class="row" style="align-items:flex-start">
+              <div style="flex:1">
+                <div style="font-weight:1000">${esc(x.p.name)}</div>
+                <div class="muted" style="font-size:12px">${esc(x.p.size_label||"")}</div>
+              </div>
+              <div style="font-weight:1000">${fmtUGX(x.p.price_ugx * x.qty)}</div>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <div class="qty">
+                <button data-dec="${esc(x.p.id)}">-</button>
+                <div style="min-width:18px;text-align:center;font-weight:1000">${x.qty}</div>
+                <button data-inc="${esc(x.p.id)}">+</button>
+              </div>
+              <button class="btn btnGhost" data-rm="${esc(x.p.id)}">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join("") + `
+        <div class="card" style="padding:12px">
+          <div class="row"><div style="font-weight:1000">Subtotal</div><div style="font-weight:1000">${fmtUGX(cartSubtotal())}</div></div>
+          <div class="row" style="margin-top:6px"><div class="muted">Delivery</div><div class="muted">${fmtUGX(fee)}</div></div>
+          <div class="row" style="margin-top:6px"><div style="font-weight:1000">Total</div><div style="font-weight:1000;color:var(--gold)">${fmtUGX(cartSubtotal()+fee)}</div></div>
+        </div>
+      `;
+
+      $$("[data-inc]").forEach(b=>b.onclick=()=>{ addToCart(b.dataset.inc, +1); renderCartModal(); });
+      $$("[data-dec]").forEach(b=>b.onclick=()=>{ addToCart(b.dataset.dec, -1); renderCartModal(); });
+      $$("[data-rm]").forEach(b=>b.onclick=()=>{ delete cart[b.dataset.rm]; save(K.cart, cart); renderDock(); renderCartModal(); });
+
+      $("#orderWhatsApp").onclick = ()=>{
+        const url = "https://wa.me/" + (settings.whatsapp_number||"+265776136111").replace(/\D/g,"") + "?text=" + encodeURIComponent(buildWhatsAppText());
+        window.open(url,"_blank");
+      };
+
+      $("#placeOrder").onclick = async ()=>{
+        const payload = buildOrderPayload();
+        await saveOrder(payload);
+      };
+    }
+
+    function buildOrderPayload(){
+      const items = cartItems();
+      const zoneId = $("#cZone").value || "";
+      const zone = zones.find(z=>z.id===zoneId) || zones.find(z=>z.is_active) || null;
+      const fee = zone ? zone.fee_ugx : 0;
+
+      const subtotal = cartSubtotal();
+      const total = subtotal + fee;
+
+      return {
+        id: uid(),
+        customer_name: ($("#cName").value||"").trim(),
+        customer_phone: ($("#cPhone").value||"").trim(),
+        delivery_zone_id: zone ? zone.id : null,
+        delivery_zone_name: zone ? zone.name : null,
+        delivery_address: ($("#cAddress").value||"").trim(),
+        notes: ($("#cNotes").value||"").trim(),
+        subtotal_ugx: subtotal,
+        delivery_fee_ugx: fee,
+        total_ugx: total,
+        status: "new",
+        order_channel: "whatsapp",
+        created_at: new Date().toISOString(),
+        items: items.map(x=>({
+          product_id: x.p.id,
+          product_name_snapshot: x.p.name,
+          unit_price_ugx: x.p.price_ugx,
+          qty: x.qty,
+          line_total_ugx: x.p.price_ugx * x.qty
+        }))
+      };
+    }
+
+    function buildWhatsAppText(){
+      const o = buildOrderPayload();
+      const lines = [];
+      lines.push("Fashsnacks order");
+      if(o.customer_name) lines.push("Name " + o.customer_name);
+      if(o.customer_phone) lines.push("Phone " + o.customer_phone);
+      if(o.delivery_zone_name) lines.push("Zone " + o.delivery_zone_name + " fee " + fmtUGX(o.delivery_fee_ugx));
+      if(o.delivery_address) lines.push("Address " + o.delivery_address);
+      lines.push("");
+      lines.push("Items");
+      o.items.forEach(it=>{
+        lines.push(it.product_name_snapshot + " qty " + it.qty + " total " + fmtUGX(it.line_total_ugx));
+      });
+      lines.push("");
+      lines.push("Subtotal " + fmtUGX(o.subtotal_ugx));
+      lines.push("Delivery " + fmtUGX(o.delivery_fee_ugx));
+      lines.push("Total " + fmtUGX(o.total_ugx));
+      if(o.notes){ lines.push(""); lines.push("Notes " + o.notes); }
+      return lines.join("\n");
+    }
+
+    // Supabase mode
+    let sb = null;
+    function getKeys(){ return load(K.sb, { url:"", key:"" }); }
+    function setKeys(o){ save(K.sb, o); }
+    function initSupabase(){
+      const keys = getKeys();
+      if(keys.url && keys.key){
+        sb = supabase.createClient(keys.url, keys.key);
+        $("#modeText").textContent = "Supabase Mode";
+      }else{
+        sb = null;
+        $("#modeText").textContent = "Local Mode";
+      }
+    }
+    initSupabase();
+
+    $("#saveKeys").onclick = ()=>{
+      const url = ($("#sbUrl").value||"").trim();
+      const key = ($("#sbKey").value||"").trim();
+      setKeys({url,key});
+      initSupabase();
+      toast("Keys saved");
+    };
+
+    $("#testSupabase").onclick = async ()=>{
+      if(!sb) return toast("No keys set");
+      try{
+        const { error } = await sb.from("app_settings").select("id").limit(1);
+        if(error) throw error;
+        toast("Supabase OK");
+      }catch{
+        toast("Supabase error");
+      }
+    };
+
+    async function syncFromSupabase(){
+      if(!sb) return toast("No keys set");
+      try{
+        const { data: s, error: se } = await sb.from("app_settings").select("*").eq("id",1).single();
+        if(!se && s){
+          settings = {
+            brand_name: s.brand_name || settings.brand_name,
+            tagline: s.tagline || settings.tagline,
+            whatsapp_number: s.whatsapp_number || settings.whatsapp_number,
+            call_number: s.call_number || settings.call_number,
+            email: s.email || settings.email,
+            map_url: s.map_embed_url || settings.map_url,
+            motto: (s.motto || settings.motto || "Its Nutting Time")
+          };
+          save(K.settings, settings);
+        }
+
+        // products
+        const { data: p, error: pe } = await sb.from("products")
+          .select("id,name,category,description,price_ugx,size_label,stock_qty,is_active,is_featured,updated_at,created_at")
+          .order("created_at",{ascending:false});
+        if(!pe && Array.isArray(p)){
+          // images
+          const ids = p.map(x=>x.id);
+          let imgMap = {};
+          if(ids.length){
+            const { data: imgs } = await sb.from("product_images")
+              .select("product_id,url,sort_order")
+              .in("product_id", ids);
+            (imgs||[]).forEach(im=>{
+              imgMap[im.product_id] = imgMap[im.product_id] || [];
+              imgMap[im.product_id].push(im);
+            });
+          }
+          products = p.map(x=>({
+            id:x.id,
+            name:x.name,
+            category:x.category,
+            description:x.description,
+            price_ugx:x.price_ugx,
+            size_label:x.size_label,
+            stock_qty:x.stock_qty,
+            is_active:x.is_active,
+            is_featured:x.is_featured,
+            images:(imgMap[x.id]||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0)).map(i=>i.url)
+          }));
+          save(K.products, products);
+        }
+
+        // zones
+        const { data: z, error: ze } = await sb.from("delivery_zones")
+          .select("id,name,fee_ugx,is_active,created_at")
+          .order("created_at",{ascending:false});
+        if(!ze && Array.isArray(z)){
+          zones = z.map(x=>({ id:x.id, name:x.name, fee_ugx:x.fee_ugx, is_active:x.is_active }));
+          save(K.zones, zones);
+        }
+
+        // orders dashboard (pull last 50)
+        const { data: o, error: oe } = await sb.from("orders")
+          .select("id,customer_name,customer_phone,subtotal_ugx,delivery_fee_ugx,total_ugx,status,created_at,delivery_zone_id")
+          .order("created_at",{ascending:false})
+          .limit(50);
+        if(!oe && Array.isArray(o)){
+          // join zone names
+          const zMap = Object.fromEntries(zones.map(x=>[x.id,x.name]));
+          const { data: oi } = await sb.from("order_items")
+            .select("order_id,product_name_snapshot,qty,line_total_ugx")
+            .in("order_id", o.map(x=>x.id));
+          const itemsBy = {};
+          (oi||[]).forEach(it=>{
+            itemsBy[it.order_id]=itemsBy[it.order_id]||[];
+            itemsBy[it.order_id].push(it);
+          });
+          orders = o.map(x=>({
+            id:x.id,
+            customer_name:x.customer_name,
+            customer_phone:x.customer_phone,
+            subtotal_ugx:x.subtotal_ugx,
+            delivery_fee_ugx:x.delivery_fee_ugx,
+            total_ugx:x.total_ugx,
+            status:x.status,
+            created_at:x.created_at,
+            delivery_zone_id:x.delivery_zone_id,
+            delivery_zone_name: zMap[x.delivery_zone_id] || null,
+            items:(itemsBy[x.id]||[]).map(it=>({
+              product_name_snapshot: it.product_name_snapshot,
+              qty: it.qty,
+              line_total_ugx: it.line_total_ugx
+            }))
+          }));
+          save(K.orders, orders);
+        }
+
+        applySettingsToUI();
+        render();
+        refreshAdminUI();
+        toast("Synced");
+      }catch{
+        toast("Sync failed");
+      }
+    }
+
+    $("#syncNow").onclick = ()=>syncFromSupabase();
+
+    // Save order
+    async function saveOrder(payload){
+      // Always local save first
+      orders.unshift(payload);
+      save(K.orders, orders);
+
+      // Reduce local stock
+      payload.items.forEach(it=>{
+        const p = products.find(x=>x.id===it.product_id);
+        if(p) p.stock_qty = Math.max(0, p.stock_qty - it.qty);
+      });
+      save(K.products, products);
+
+      // Clear cart
+      cart = {};
+      save(K.cart, cart);
+
+      // Supabase write
+      if(sb){
+        try{
+          const { data: ord, error } = await sb.from("orders").insert([{
+            customer_name: payload.customer_name,
+            customer_phone: payload.customer_phone,
+            delivery_zone_id: payload.delivery_zone_id,
+            delivery_address: payload.delivery_address,
+            notes: payload.notes,
+            subtotal_ugx: payload.subtotal_ugx,
+            delivery_fee_ugx: payload.delivery_fee_ugx,
+            total_ugx: payload.total_ugx,
+            status: payload.status,
+            order_channel: payload.order_channel
+          }]).select("*").single();
+          if(error) throw error;
+
+          const items = payload.items.map(it=>({
+            order_id: ord.id,
+            product_id: it.product_id,
+            product_name_snapshot: it.product_name_snapshot,
+            unit_price_ugx: it.unit_price_ugx,
+            qty: it.qty,
+            line_total_ugx: it.line_total_ugx
+          }));
+          const { error: ei } = await sb.from("order_items").insert(items);
+          if(ei) throw ei;
+
+          // update stock in supabase
+          for(const it of payload.items){
+            const p = products.find(x=>x.id===it.product_id);
+            if(p){
+              await sb.from("products").update({ stock_qty: p.stock_qty }).eq("id", it.product_id);
+            }
+          }
+        }catch{
+          // already saved locally
+        }
+      }
+
+      $("#cartModal").classList.remove("active");
+      render();
+      refreshAdminUI();
+      toast("Order saved");
+    }
+
+    // Admin UI
+    function refreshAdminUI(){
+      const keys = getKeys();
+      $("#sbUrl").value = keys.url || "";
+      $("#sbKey").value = keys.key || "";
+
+      $("#adminState").textContent = isAdmin() ? "Unlocked" : "Locked";
+
+      // Fill settings fields
+      $("#sBrand").value = settings.brand_name || "";
+      $("#sTagline").value = settings.tagline || "";
+      $("#sWhatsApp").value = settings.whatsapp_number || "";
+      $("#sCall").value = settings.call_number || "";
+      $("#sEmail").value = settings.email || "";
+      $("#sMap").value = settings.map_url || "";
+      $("#sMotto").value = settings.motto || "";
+
+      // About fields
+      $("#aOneLine").value = about.one_line || "";
+      $("#aStory").value = about.story || "";
+      $("#aFounder").value = about.founder || "";
+      $("#aVision").value = about.vision || "";
+      $("#aMission").value = about.mission || "";
+      $("#aValues").value = about.values || "";
+
+      // Lock buttons
+      const locked = !isAdmin();
+      ["saveSettings","saveAbout","addProduct","addZone","syncNow"].forEach(id=>{
+        const el = $("#"+id);
+        if(el) el.disabled = locked && id!=="syncNow";
+      });
+
+      renderAdminProducts();
+      renderOrdersBoard();
+      renderKPIs();
+    }
+
+    // Save settings
+    $("#saveSettings").onclick = async ()=>{
+      if(!isAdmin()) return toast("Locked");
+      settings = {
+        brand_name: ($("#sBrand").value||"").trim() || "Fashsnacks",
+        tagline: ($("#sTagline").value||"").trim() || "Golden Organic Goodies",
+        whatsapp_number: ($("#sWhatsApp").value||"").trim() || "+265776136111",
+        call_number: ($("#sCall").value||"").trim() || "+265776136111",
+        email: ($("#sEmail").value||"").trim(),
+        map_url: ($("#sMap").value||"").trim(),
+        motto: ($("#sMotto").value||"").trim() || "Its Nutting Time"
+      };
+      save(K.settings, settings);
+      applySettingsToUI();
+      toast("Saved");
+
+      if(sb){
+        try{
+          await sb.from("app_settings").upsert([{
+            id:1,
+            brand_name: settings.brand_name,
+            tagline: settings.tagline,
+            whatsapp_number: settings.whatsapp_number,
+            call_number: settings.call_number,
+            email: settings.email,
+            map_embed_url: settings.map_url,
+            motto: settings.motto
+          }], { onConflict:"id" });
+        }catch{}
+      }
+    };
+
+    // Save about
+    $("#saveAbout").onclick = async ()=>{
+      if(!isAdmin()) return toast("Locked");
+      about = {
+        one_line: ($("#aOneLine").value||"").trim(),
+        story: ($("#aStory").value||"").trim(),
+        founder: ($("#aFounder").value||"").trim(),
+        vision: ($("#aVision").value||"").trim(),
+        mission: ($("#aMission").value||"").trim(),
+        values: ($("#aValues").value||"").trim()
+      };
+      save(K.about, about);
+      toast("Saved");
+    };
+
+    // Zones
+    $("#addZone").onclick = async ()=>{
+      if(!isAdmin()) return toast("Locked");
+      const name = ($("#zName").value||"").trim();
+      const fee = parseInt($("#zFee").value||"0",10)||0;
+      if(!name) return toast("Zone name");
+      const z = { id: uid(), name, fee_ugx: fee, is_active: true };
+      zones.unshift(z);
+      save(K.zones, zones);
+
+      if(sb){
+        try{
+          await sb.from("delivery_zones").insert([{ name, fee_ugx: fee, is_active: true }]);
+          await syncFromSupabase();
+        }catch{}
+      }
+
+      $("#zName").value=""; $("#zFee").value="";
+      renderZones();
+      toast("Zone added");
+    };
+
+    // Add product with upload OR URL
+    $("#addProduct").onclick = async ()=>{
+      if(!isAdmin()) return toast("Locked");
+
+      const name = ($("#pName").value||"").trim();
+      const category = ($("#pCat").value||"Snacks").trim();
+      const description = ($("#pDesc").value||"").trim();
+      const price_ugx = parseInt($("#pPrice").value||"0",10)||0;
+      const size_label = ($("#pSize").value||"").trim();
+      const stock_qty = Math.max(0, parseInt($("#pStock").value||"0",10)||0);
+      const is_featured = ($("#pFeatured").value==="true");
+
+      if(!name) return toast("Product name");
+
+      let imgUrl = ($("#pImgUrl").value||"").trim();
+      const file = $("#pImgFile").files && $("#pImgFile").files[0];
+
+      if(file){
+        if(sb){
+          try{
+            const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+            const path = `products/${Date.now()}_${Math.random().toString(16).slice(2)}.${ext}`;
+            const { error: upErr } = await sb.storage.from("product-images").upload(path, file, { upsert:false });
+            if(upErr) throw upErr;
+            const { data } = sb.storage.from("product-images").getPublicUrl(path);
+            imgUrl = data.publicUrl;
+          }catch{
+            imgUrl = await fileToDataURL(file);
+          }
+        }else{
+          imgUrl = await fileToDataURL(file);
+        }
+      }
+
+      // Local insert
+      const pLocal = {
+        id: uid(),
+        name, category, description, price_ugx, size_label, stock_qty,
+        is_active:true, is_featured,
+        images: imgUrl ? [imgUrl] : []
+      };
+      products.unshift(pLocal);
+      save(K.products, products);
+
+      // Supabase insert
+      if(sb){
+        try{
+          const { data: prod, error } = await sb.from("products").insert([{
+            name, category, description, price_ugx, size_label, stock_qty,
+            is_active:true, is_featured
+          }]).select("*").single();
+          if(error) throw error;
+
+          if(imgUrl){
+            await sb.from("product_images").insert([{ product_id: prod.id, url: imgUrl, sort_order: 0 }]);
+          }
+          await syncFromSupabase();
+        }catch{}
+      }
+
+      $("#pName").value=""; $("#pCat").value=""; $("#pDesc").value="";
+      $("#pPrice").value=""; $("#pSize").value=""; $("#pStock").value="";
+      $("#pImgUrl").value=""; $("#pImgFile").value="";
+
+      render();
+      renderAdminProducts();
+      toast("Product added");
+    };
+
+    function fileToDataURL(file){
+      return new Promise((res,rej)=>{
+        const r=new FileReader();
+        r.onload=()=>res(r.result);
+        r.onerror=rej;
+        r.readAsDataURL(file);
+      });
+    }
+
+    // Admin products list with stock controls
+    function renderAdminProducts(){
+      const host = $("#adminProducts");
+      if(!isAdmin()){
+        host.textContent = "Login to manage products";
+        return;
+      }
+      const list = products.slice(0,80);
+      host.innerHTML = list.map(p=>{
+        const img = (p.images && p.images.length)?p.images[0]:"";
+        return `
+          <div class="card" style="padding:12px;margin-bottom:10px">
+            <div class="row" style="align-items:flex-start">
+              <div style="flex:1">
+                <div style="font-weight:1000">${esc(p.name)}</div>
+                <div class="muted" style="font-size:12px">${esc(p.category)} ${esc(p.size_label||"")}</div>
+                <div class="muted" style="font-size:12px">Price ${fmtUGX(p.price_ugx)} Stock ${p.stock_qty}</div>
+              </div>
+              <div style="text-align:right;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+                <button class="btn btnGhost" data-toggle="${esc(p.id)}">${p.is_active?"Disable":"Enable"}</button>
+                <button class="btn btnGhost" data-feature="${esc(p.id)}">${p.is_featured?"Unfeature":"Feature"}</button>
+                <button class="btn btnGhost" data-del="${esc(p.id)}">Delete</button>
+              </div>
+            </div>
+
+            ${img? `<div class="hr"></div><img src="${esc(img)}" style="width:100%;border-radius:12px;border:1px solid var(--border)" />` : ""}
+
+            <div class="hr"></div>
+            <div class="form">
+              <div>
+                <label>Stock qty</label>
+                <input type="number" data-stock="${esc(p.id)}" value="${p.stock_qty}" />
+              </div>
+              <div class="full">
+                <button class="btn btnSoft" data-save="${esc(p.id)}">Save changes</button>
+              </div>
+              <div class="full">
+                <label>Add another image by URL</label>
+                <input placeholder="https://image.jpg" data-addimg="${esc(p.id)}" />
+                <button class="btn btnGhost" style="margin-top:8px" data-addimgbtn="${esc(p.id)}">Add image</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      $$("[data-toggle]").forEach(b=>b.onclick=()=>toggleProduct(b.dataset.toggle));
+      $$("[data-feature]").forEach(b=>b.onclick=()=>featureProduct(b.dataset.feature));
+      $$("[data-del]").forEach(b=>b.onclick=()=>deleteProduct(b.dataset.del));
+      $$("[data-save]").forEach(b=>b.onclick=()=>saveProduct(b.dataset.save));
+      $$("[data-addimgbtn]").forEach(b=>b.onclick=()=>addProductImage(b.dataset.addimgbtn));
+    }
+
+    async function toggleProduct(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      p.is_active = !p.is_active;
+      save(K.products, products);
+      if(sb){
+        try{ await sb.from("products").update({ is_active:p.is_active }).eq("id", id); }catch{}
+      }
+      render();
+      renderAdminProducts();
+      toast("Updated");
+    }
+
+    async function featureProduct(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      p.is_featured = !p.is_featured;
+      save(K.products, products);
+      if(sb){
+        try{ await sb.from("products").update({ is_featured:p.is_featured }).eq("id", id); }catch{}
+      }
+      render();
+      renderAdminProducts();
+      toast("Updated");
+    }
+
+    async function saveProduct(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      const val = document.querySelector(`[data-stock="${id}"]`);
+      const stock = Math.max(0, parseInt(val.value||"0",10)||0);
+      p.stock_qty = stock;
+      save(K.products, products);
+
+      if(sb){
+        try{ await sb.from("products").update({ stock_qty:stock }).eq("id", id); }catch{}
+      }
+      render();
+      renderAdminProducts();
+      toast("Saved");
+    }
+
+    async function addProductImage(id){
+      const input = document.querySelector(`[data-addimg="${id}"]`);
+      const url = (input?.value||"").trim();
+      if(!url) return toast("Image URL");
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      p.images = p.images || [];
+      p.images.push(url);
+      save(K.products, products);
+
+      if(sb){
+        try{ await sb.from("product_images").insert([{ product_id:id, url, sort_order: (p.images.length-1) }]); }catch{}
+      }
+
+      input.value="";
+      render();
+      renderAdminProducts();
+      toast("Image added");
+    }
+
+    async function deleteProduct(id){
+      if(!confirm("Delete product")) return;
+      products = products.filter(x=>x.id!==id);
+      delete cart[id];
+      save(K.products, products);
+      save(K.cart, cart);
+
+      if(sb){
+        try{
+          await sb.from("product_images").delete().eq("product_id", id);
+          await sb.from("products").delete().eq("id", id);
+        }catch{}
+      }
+
+      render();
+      renderAdminProducts();
+      toast("Deleted");
+    }
+
+    // Orders dashboard
+    function renderOrdersBoard(){
+      const host = $("#ordersBoard");
+      if(!isAdmin()){
+        host.textContent = "Login to view orders";
+        return;
+      }
+      if(!orders.length){
+        host.textContent = "No orders";
+        return;
+      }
+
+      host.innerHTML = orders.slice(0,40).map(o=>{
+        const when = o.created_at ? new Date(o.created_at).toLocaleString() : "";
+        const items = (o.items||[]).slice(0,6).map(it=>`<div class="muted" style="font-size:12px">${esc(it.product_name_snapshot)} qty ${it.qty} total ${fmtUGX(it.line_total_ugx||0)}</div>`).join("");
+        return `
+          <div class="card" style="padding:12px;margin-bottom:10px">
+            <div class="row">
+              <div style="font-weight:1000">Order ${esc(String(o.id||"").slice(-6))}</div>
+              <div class="muted">${esc(when)}</div>
+            </div>
+            <div class="muted" style="margin-top:6px">${esc(o.customer_name||"")} ${esc(o.customer_phone||"")}</div>
+            <div class="muted" style="margin-top:6px">Zone ${esc(o.delivery_zone_name||"")} Total ${fmtUGX(o.total_ugx||0)} Status ${esc(o.status||"")}</div>
+            <div class="hr"></div>
+            ${items || `<div class="muted" style="font-size:12px">No items</div>`}
+            <div class="hr"></div>
+            <div class="row" style="gap:10px;flex-wrap:wrap;justify-content:flex-end">
+              <button class="btn btnGhost" data-st="confirmed" data-oid="${esc(o.id)}">Confirm</button>
+              <button class="btn btnGhost" data-st="preparing" data-oid="${esc(o.id)}">Prepare</button>
+              <button class="btn btnGhost" data-st="out_for_delivery" data-oid="${esc(o.id)}">Dispatch</button>
+              <button class="btn btnGhost" data-st="delivered" data-oid="${esc(o.id)}">Deliver</button>
+              <button class="btn btnGhost" data-st="cancelled" data-oid="${esc(o.id)}">Cancel</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      $$("[data-st]").forEach(b=>b.onclick=()=>setOrderStatus(b.dataset.oid, b.dataset.st));
+    }
+
+    async function setOrderStatus(orderId, status){
+      const o = orders.find(x=>String(x.id)===String(orderId));
+      if(!o) return;
+      o.status = status;
+      save(K.orders, orders);
+
+      if(sb){
+        try{
+          await sb.from("orders").update({ status }).eq("id", orderId);
+        }catch{}
+      }
+
+      renderOrdersBoard();
+      renderKPIs();
+      toast("Status updated");
+    }
+
+    function renderKPIs(){
+      const totalProducts = products.length;
+      const activeProducts = products.filter(p=>p.is_active).length;
+      const lowStock = products.filter(p=>p.is_active && p.stock_qty>0 && p.stock_qty<=5).length;
+      const outStock = products.filter(p=>p.is_active && p.stock_qty===0).length;
+
+      const newOrders = orders.filter(o=>o.status==="new").length;
+      const preparing = orders.filter(o=>o.status==="preparing").length;
+      const dispatch = orders.filter(o=>o.status==="out_for_delivery").length;
+      const delivered = orders.filter(o=>o.status==="delivered").length;
+
+      $("#kpis").innerHTML = `
+        <div class="kpi"><div class="t">Products</div><div class="v">${totalProducts}</div></div>
+        <div class="kpi"><div class="t">Active</div><div class="v">${activeProducts}</div></div>
+        <div class="kpi"><div class="t">Low stock</div><div class="v">${lowStock}</div></div>
+        <div class="kpi"><div class="t">Out of stock</div><div class="v">${outStock}</div></div>
+        <div class="kpi"><div class="t">New orders</div><div class="v">${newOrders}</div></div>
+        <div class="kpi"><div class="t">Preparing</div><div class="v">${preparing}</div></div>
+        <div class="kpi"><div class="t">Dispatch</div><div class="v">${dispatch}</div></div>
+        <div class="kpi"><div class="t">Delivered</div><div class="v">${delivered}</div></div>
+      `;
+    }
+
+    // Render all
+    function render(){
+      applySettingsToUI();
+      renderFilters();
+      setSortUI();
+      renderGrid();
+      renderZones();
+      renderDock();
+    }
+
+    // First render
+    applySettingsToUI();
+    render();
+    refreshAdminUI();
+  })();
+  </script>
+</body>
+</html>
+    
